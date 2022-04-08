@@ -8,12 +8,6 @@ use Xingfupeng\LaravelSuperValidator\Support\ValidatorHandler;
 class LaravelSuperValidatorProvider extends ServiceProvider
 {
     /**
-     * 超级校验的名称
-     *
-     * @var string
-     */
-    private $name = 'laravel_super_validator';
-    /**
      * Register services.
      *
      * @return void
@@ -31,17 +25,23 @@ class LaravelSuperValidatorProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'config.php' => config_path($this->name . '.php'),
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'config.php' => config_path('laravel_super_validator.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'config.php', $this->name
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'config.php', 'laravel_super_validator'
         );
         $this->publishes([
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'fields.php' => config_path($this->name . '_fields.php'),
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'fields.php' => config_path('laravel_super_validator_fields.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'fields.php', $this->name . '_fields'
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'fields.php', 'laravel_super_validator_fields'
         );
-        app(ValidatorHandler::class)->validate();
+        $this->publishes([
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'scenes.php' => config_path('laravel_super_validator_scenes.php'),
+        ], 'config');
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'scenes.php', 'laravel_super_validator_scenes'
+        );
+        app(ValidatorHandler::class, [$this])->validate();
     }
 }
