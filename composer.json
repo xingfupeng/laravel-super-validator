@@ -1,0 +1,15 @@
+{
+    "name": "xingfupeng/laravel-super-validation",
+    "autoload": {
+        "psr-4": {
+            "Xingfupeng\\LaravelSuperValidation\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "xingfupeng",
+            "email": "xingfupeng@163.com"
+        }
+    ],
+    "require": {}
+}
