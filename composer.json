@@ -5,11 +5,13 @@
             "Xingfupeng\\LaravelSuperValidation\\": "src/"
         }
     },
+    "license": "MIT",
     "authors": [
         {
             "name": "xingfupeng",
             "email": "xingfupeng@163.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "minimum-stability": "master"
 }
