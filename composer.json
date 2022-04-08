@@ -1,8 +1,8 @@
 {
-    "name": "xingfupeng/laravel-super-validation",
+    "name": "xingfupeng/laravel-super-validator",
     "autoload": {
         "psr-4": {
-            "Xingfupeng\\LaravelSuperValidation\\": "src/"
+            "Xingfupeng\\LaravelSuperValidator\\": "src/"
         }
     },
     "license": "MIT",

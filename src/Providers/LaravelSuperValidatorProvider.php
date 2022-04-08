@@ -1,11 +1,11 @@
 <?php
 
-namespace Xingfupeng\LaravelSuperValidation\Providers;
+namespace Xingfupeng\LaravelSuperValidator\Providers;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
-class LaravelSuperValidationProvider extends ServiceProvider
+class LaravelSuperValidatorProvider extends ServiceProvider
 {
     /**
      * Register services.

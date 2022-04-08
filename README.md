@@ -1,4 +1,4 @@
-# laravel-super-validation
+# laravel-super-validator
 
 #### 介绍
 在 Laravel 开发过程中，你是否会因为过多的参数校验而苦恼。laravel-super-validation 会帮助你实现场景参数校验、公共参数校验或者智能参数校验模式。从来轻松解决参数校验的苦恼。而且还可以达到很好的解耦效果。
@@ -9,7 +9,7 @@
 
 #### 安装教程
 
-1.  xxxx
+1.  composer require xingfupeng/laravel-super-validator
 2.  xxxx
 3.  xxxx
 
