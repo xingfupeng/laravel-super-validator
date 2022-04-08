@@ -2,11 +2,17 @@
 
 namespace Xingfupeng\LaravelSuperValidator\Providers;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Xingfupeng\LaravelSuperValidator\Support\ValidatorHandler;
 
 class LaravelSuperValidatorProvider extends ServiceProvider
 {
+    /**
+     * 超级校验的名称
+     *
+     * @var string
+     */
+    private $name = 'laravel_super_validator';
     /**
      * Register services.
      *
@@ -24,22 +30,18 @@ class LaravelSuperValidatorProvider extends ServiceProvider
      */
     public function boot()
     {
-        $request = app('request');
-        $actionName = app('router')->getRoutes()->match($request)->getActionName();
-        $rules = 
-        $input = $request->input();
-        $rules = [
-            'id' => 'required|integer',
-            'name' => 'required|integer',
-        ];
-        $messages = [
-            'id.required' => 'ID不能为空',
-            'id.integer' => 'ID必须是数字',
-            'name.required' => 'name不能为空',
-            'name.integer' => 'name必须是数字',
-        ];
-        $validator = Validator::make($input, $rules, $messages);
-        $errors = $validator->errors();
-        dd($validator, $errors);
+        $this->publishes([
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'config.php' => config_path($this->name . '.php'),
+        ], 'config');
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'config.php', $this->name
+        );
+        $this->publishes([
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'fields.php' => config_path($this->name . '_fields.php'),
+        ], 'config');
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'fields.php', $this->name . '_fields'
+        );
+        app(ValidatorHandler::class)->validate();
     }
 }

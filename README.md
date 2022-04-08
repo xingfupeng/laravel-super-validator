@@ -9,13 +9,16 @@
 
 #### 安装教程
 
-1.  ```composer require xingfupeng/laravel-super-validator```
-2.  xxxx
+1.  安装
+    ```composer require xingfupeng/laravel-super-validator```
+2.  发布配置文件
+    ```php artisan vendor:publish --tag=config --force```
 3.  xxxx
 
 #### 使用说明
 
-1.  xxxx
+1.  参数配置
+    config/laravel_super_validator.php 的配置项可以覆盖 laravel_super_validator中的配置项
 2.  xxxx
 3.  xxxx
 
