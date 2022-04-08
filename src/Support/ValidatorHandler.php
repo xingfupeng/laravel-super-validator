@@ -13,6 +13,20 @@ class ValidatorHandler
     public $input = [];
 
     /**
+     * 参数规则
+     *
+     * @var array
+     */
+    public $rules = [];
+
+    /**
+     * 提示信息
+     *
+     * @var array
+     */
+    public $messages = [];
+
+    /**
      * 场景名称
      * 即控制器行为名称
      *
@@ -35,21 +49,21 @@ class ValidatorHandler
     {
         $validatePattern = config('laravel_super_validator.validate_pattern');
         if (1 === $validatePattern) {
-            $this->globalValidate();
+            $this->globalValidate()->execute();
         }
 
         if (2 === $validatePattern) {
-            $this->scenesValidate();
+            $this->scenesValidate()->execute();
         }
 
         if (3 == $validatePattern) {
-            $this->scenesValidate();
-            $this->globalValidate();
+            $this->scenesValidate()->execute();
+            $this->globalValidate()->execute();
         }
 
         if (4 === $validatePattern) {
-            $this->globalValidate();
-            $this->scenesValidate();
+            $this->globalValidate()->execute();
+            $this->scenesValidate()->execute();
         }
     }
 
@@ -60,17 +74,13 @@ class ValidatorHandler
      */
     public function globalValidate()
     {
-        $rules = [];
-        $messages = [];
         foreach ($this->input as $field => $value) {
-            $rules[$field] = config('laravel_super_validator_fields.' . $field . '.rules');
+            $this->rules[$field] = config('laravel_super_validator_fields.' . $field . '.rules');
             foreach (config('laravel_super_validator_fields.' . $field . '.messages') as $rule => $message) {
-                $messages[$field . '.' . $rule] = $message;
+                $this->messages[$field . '.' . $rule] = $message;
             }
         }
-        $validator = Validator::make($this->input, $rules, $messages);
-        $errors = $validator->errors();
-        dd($this->input, $validator->fails(), get_class_methods($validator), $errors);
+        return $this;
     }
 
     /**
@@ -80,6 +90,22 @@ class ValidatorHandler
      */
     public function scenesValidate()
     {
+        return $this;
+    }
 
+    /**
+     * 执行校验
+     *
+     * @return void
+     */
+    public function execute()
+    {
+        $validator = Validator::make($this->input, $this->rules, $this->messages);
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            dd($errors);
+            return response()->json($errors);
+            // dd($this->input, $validator->fails(), get_class_methods($validator), $errors);
+        }
     }
 }

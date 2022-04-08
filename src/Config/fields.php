@@ -14,4 +14,11 @@ return [
             'integer' => '姓名必须是数字',
         ]
     ],
+    'author.name' => [
+        'rules' =>  'required|integer',
+        'messages' => [
+            'required' => '作者姓名不能为空',
+            'integer' => '作者姓名必须是数字',
+        ]
+    ]
 ];
