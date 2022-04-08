@@ -9,7 +9,7 @@
 
 #### 安装教程
 
-1.  composer require xingfupeng/laravel-super-validator
+1.  ```composer require xingfupeng/laravel-super-validator```
 2.  xxxx
 3.  xxxx
 
