@@ -13,7 +13,14 @@
     ```composer require xingfupeng/laravel-super-validator```
 2.  发布配置文件
     ```php artisan vendor:publish --tag=config --force```
-3.  xxxx
+3.  添加服务器提供者配置
+    ```php
+    'providers' => [
+        ...
+        Xingfupeng\LaravelSuperValidator\Providers\LaravelSuperValidatorProvider::class,
+
+    ],
+    ```
 
 #### 使用说明
 
