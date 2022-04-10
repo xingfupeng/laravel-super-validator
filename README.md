@@ -10,9 +10,13 @@
 #### 安装教程
 
 1.  安装
-    ```composer require xingfupeng/laravel-super-validator```
+    ```sh
+    composer require xingfupeng/laravel-super-validator
+    ```
 2.  发布配置文件
-    ```php artisan vendor:publish --tag=config --force```
+    ```sh
+    php artisan vendor:publish --tag=config --force
+    ```
 3.  添加服务器提供者配置
     ```php
     'providers' => [
