@@ -92,7 +92,8 @@ class ValidatorHandler
         $scene = config('laravel_super_validator_scenes.' . $this->scene);
         foreach ($scene as $field => $config) {
             $this->rules[$field] = $config['rules'];
-            foreach ($config['messages'] as $rule => $message) {
+            $messages = isset($config['messages']) ? $config['messages'] : config('laravel_super_validator_fields.' . $field . '.messages');
+            foreach ($messages as $rule => $message) {
                 $this->messages[$field . '.' . $rule] = $message;
             }
         }

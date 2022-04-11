@@ -9,5 +9,8 @@ return [
                 'max' => 'id不能多于:max个字符'
             ]
         ],
+        'page' => [
+            'rules' => 'required',
+        ]
     ],
 ];
