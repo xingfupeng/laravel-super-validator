@@ -39,6 +39,7 @@
 
 1.  参数配置<br />
     config/laravel_super_validator.php 的配置项可以覆盖 laravel_super_validator中的配置项
+    config/laravel_super_validator_fields.php 通用检验配置
 2.  自定义校验异常操作<br />
     捕获异常信息后可自定义数据格式返回给客户端，特别使用于接口开发。
     ```php
