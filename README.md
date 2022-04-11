@@ -12,7 +12,7 @@
 组件支持场景校验，当用户用邮箱登录的时候，场景中定义邮箱字段为必填，与内置的校验规则合并一起校验。<br />
 场景设定的规则是控制器的命名空间类名加方法名。<br />
 例如 : App\Http\Controllers\ValidationController@index<br />
-校验 App\Http\Controllers\ValidationController.php 文件下的 index  方法
+自动校验 App\Http\Controllers\ValidationController.php 文件下的 index  方法
 
 #### 安装教程
 
