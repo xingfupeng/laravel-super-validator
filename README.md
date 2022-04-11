@@ -11,7 +11,7 @@
 这样一来在控制器层面不需要写过多的参数校验。<br /><br />
 组件支持场景校验，当用户用邮箱登录的时候，场景中定义邮箱字段为必填，与内置的校验规则合并一起校验。<br />
 场景设定的规则是控制器的命名空间类名加方法名。<br />
-例如 : 场景App\Http\Controllers\ValidationController@index<br />
+例如 : App\Http\Controllers\ValidationController@index<br />
 
 
 
@@ -33,6 +33,24 @@
 
     ],
     ```
+
+#### 内置配置
+```php
+return [
+    'id' => [
+        'rules' => 'integer',
+        'messages' => [
+            'integer' => 'ID必须是数字',
+        ]
+    ],
+    'page' => [
+        'rules' => 'integer',
+        'messages' => [
+            'integer' => '页数必须是数字',
+        ]
+    ],
+];
+```
 
 #### 使用说明
 
