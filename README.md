@@ -1,8 +1,7 @@
 # laravel-super-validator
 
 #### 组件介绍
-在 Laravel 开发过程中，你是否会因为过多的参数校验而苦恼。laravel-super-validation 会帮助你实现场景参数校验、公共参数校验或者智能参数校验模式。从来轻松解决参数校验的苦恼。而且还可以达到很好的解耦效果。<br />
-**<font color="#FF0000">一句话:控制器里不需要写任何参数校验代码也能实现参数校验。</font>**
+在 Laravel 开发过程中，你是否会因为过多的参数校验而苦恼。laravel-super-validation 会帮助你实现场景参数校验、公共参数校验或者智能参数校验模式。从来轻松解决参数校验的苦恼。而且还可以达到很好的解耦效果。
 
 #### 校验思想
 组件内置很多通用字段校验，默认规则非必填，但会按照既定的格式进行校验。<br />
@@ -40,7 +39,6 @@
 
 1.  参数配置<br />
     config/laravel_super_validator.php 的配置项可以覆盖 laravel_super_validator中的配置项
-    config/laravel_super_validator_fields.php 通用检验配置
 2.  自定义校验异常操作<br />
     捕获异常信息后可自定义数据格式返回给客户端，特别使用于接口开发。
     ```php
