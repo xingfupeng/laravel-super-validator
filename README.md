@@ -55,6 +55,47 @@
         ...
     }
     ```
+3. 通用配置校验
+   ```php
+    // config/laravel-super-validator-fields.php
+    <?php
+    return [
+        'id' => [
+            'rules' => 'integer',
+            'messages' => [
+                'required' => '请输入ID',
+                'integer' => 'ID必须是数字',
+            ]
+        ],
+        'page' => [
+            'rules' => 'integer',
+            'messages' => [
+                'required' => '请输入分页',
+                'integer' => '页数必须是数字',
+            ]
+        ],
+    ];
+   ```
+4. 场景校验配置
+   ```php
+    // config/laravel-super-validator-scenes.php
+    <?php
+    return [
+        'App\Http\Controllers\ValidationController@index' => [
+            'id' => [
+                'rules' => 'required|min:3|max:6',
+                'messages' => [
+                    'required' => 'ID不能为空',
+                    'min' => 'id不能少于:min个字符',
+                    'max' => 'id不能多于:max个字符'
+                ]
+            ],
+            'page' => [
+                'rules' => 'required',
+            ]
+        ],
+    ];
+   ```
 
 
 #### 内置校验
