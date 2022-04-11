@@ -26,6 +26,7 @@
     ```
 3.  添加服务器提供者配置
     ```php
+    // config/app.php
     'providers' => [
         ...
         Xingfupeng\LaravelSuperValidator\Providers\LaravelSuperValidatorProvider::class,
@@ -36,17 +37,23 @@
 
 #### 使用说明
 
-1.  参数配置
+1.  参数配置<br />
     config/laravel_super_validator.php 的配置项可以覆盖 laravel_super_validator中的配置项
-2.  xxxx
+2.  自定义校验异常操作<br />
+    捕获异常信息后可自定义数据格式返回给客户端，特别使用于接口开发。
+    ```php
+    // app/Exceptions/Handler.php
+    public function register()
+    {
+        $this->reportable(function (LarvelSuperValidatorException $e) {
+            return response($e->getMessage());
+        });
+        ...
+    }
+    ```
 3.  xxxx
 
 #### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
 
 
 #### 内置校验

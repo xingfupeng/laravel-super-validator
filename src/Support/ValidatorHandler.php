@@ -48,24 +48,8 @@ class ValidatorHandler
      */
     public function validate()
     {
-        $validatePattern = config('laravel_super_validator.validate_pattern');
-        if (1 === $validatePattern) {
-            $this->globalValidate()->execute();
-        }
-
-        if (2 === $validatePattern) {
-            $this->scenesValidate()->execute();
-        }
-
-        if (3 == $validatePattern) {
-            $this->scenesValidate()->execute();
-            $this->globalValidate()->execute();
-        }
-
-        if (4 === $validatePattern) {
-            $this->globalValidate()->execute();
-            $this->scenesValidate()->execute();
-        }
+        $this->scenesValidate()->execute();
+        $this->globalValidate()->execute();
     }
 
     /**
@@ -75,6 +59,10 @@ class ValidatorHandler
      */
     public function globalValidate()
     {
+        if (false == config('laravel_super_validator.global_validate_enable')) {
+            // 关闭通用校验
+            return $this;
+        }
         $fields = array_keys($this->input);
         foreach ($fields as $field) {
             $fieldRules = config('laravel_super_validator_fields.' . $field . '.rules');
