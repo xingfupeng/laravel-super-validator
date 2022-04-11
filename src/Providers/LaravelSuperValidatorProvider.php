@@ -42,6 +42,6 @@ class LaravelSuperValidatorProvider extends ServiceProvider
         $this->mergeConfigFrom(
             dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'scenes.php', 'laravel_super_validator_scenes'
         );
-        app(ValidatorHandler::class, [$this])->validate();
+        return app(ValidatorHandler::class, [$this])->validate();
     }
 }

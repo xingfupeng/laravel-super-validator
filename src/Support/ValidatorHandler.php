@@ -2,6 +2,7 @@
 namespace Xingfupeng\LaravelSuperValidator\Support;
 
 use Illuminate\Support\Facades\Validator;
+use Xingfupeng\LaravelSuperValidator\Exceptions\LarvelSuperValidatorException;
 
 class ValidatorHandler
 {
@@ -70,12 +71,18 @@ class ValidatorHandler
     /**
      * 全局校验
      *
-     * @return void
+     * @return object
      */
     public function globalValidate()
     {
-        foreach ($this->input as $field => $value) {
-            $this->rules[$field] = config('laravel_super_validator_fields.' . $field . '.rules');
+        $fields = array_keys($this->input);
+        foreach ($fields as $field) {
+            $fieldRules = config('laravel_super_validator_fields.' . $field . '.rules');
+            if (is_null($fieldRules)) {
+                // 避免客户端传递非配置中的参数进行非预期的校验
+                continue;
+            }
+            $this->rules[$field] = $fieldRules;
             foreach (config('laravel_super_validator_fields.' . $field . '.messages') as $rule => $message) {
                 $this->messages[$field . '.' . $rule] = $message;
             }
@@ -86,10 +93,21 @@ class ValidatorHandler
     /**
      * 场景校验
      *
-     * @return void
+     * @return object
      */
     public function scenesValidate()
     {
+        // 闭包不进行校验直接返回
+        if ($this->scene == 'Closure') {
+            return $this;
+        }
+        $scene = config('laravel_super_validator_scenes.' . $this->scene);
+        foreach ($scene as $field => $config) {
+            $this->rules[$field] = $config['rules'];
+            foreach ($config['messages'] as $rule => $message) {
+                $this->messages[$field . '.' . $rule] = $message;
+            }
+        }
         return $this;
     }
 
@@ -102,10 +120,7 @@ class ValidatorHandler
     {
         $validator = Validator::make($this->input, $this->rules, $this->messages);
         if ($validator->fails()) {
-            $errors = $validator->errors();
-            dd($errors);
-            return response()->json($errors);
-            // dd($this->input, $validator->fails(), get_class_methods($validator), $errors);
+            throw new LarvelSuperValidatorException($validator->errors());
         }
     }
 }
